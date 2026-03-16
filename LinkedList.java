@@ -1,0 +1,125 @@
+
+class LinkedList{
+    static class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data = data ;
+            this.next =  null;
+        }
+    }
+    public static Node head = null;
+    public static Node tail = null;
+    
+    public static void addFirst(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = tail = newNode ;
+            return;
+        }
+        newNode.next = head;
+        head = newNode;
+    }
+    public static void addLast(int data){
+        Node newNode = new Node(data);
+        if(head == null) {
+            head = tail = newNode;
+            return;
+        }
+        tail.next = newNode;
+        tail = newNode;
+    }
+    public static void deleteFirst(){
+        if(head == null){
+            System.out.println("list is empty");
+            return;
+        }
+        else if(head == tail){
+            head = tail = null;
+            System.out.println("Item is deleted " + head.data);
+            return;
+        }
+        else{
+            head = head.next;
+        }
+    }
+    public static void deleteLast(){
+        if(head == null){
+            System.out.println("List is empty");
+            return;
+        }
+        else if(head == tail){
+            head = tail = null;
+            return;
+        }
+            Node temp = head;
+            while(temp.next != tail){
+                temp = temp.next;
+            }
+            temp.next = null;
+            tail = temp;
+    }
+    public static void add(int data , int pos){
+        Node newNode = new Node(data);
+         if(head == null) {
+            head = tail = newNode;
+            return;
+        }
+        if(pos == 0){
+            addFirst(data);
+            return;
+        }
+        Node temp =head;
+        for(int i=0 ;i<pos-1;i++){
+            if(temp.next == null){
+                throw new IndexOutOfBoundsException("Position out of bounds");
+            }
+            temp = temp.next;
+        }
+        if(temp.next == null){
+            addLast(data);
+            return;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+    public static void delete(int pos){
+        if(head == null){
+            System.out.println("the is is empty");
+            return;
+        }
+        else if(pos == 0){
+            deleteFirst();
+            return;
+        }
+        Node temp = head;
+        for(int i=0;i<pos-1;i++){
+            if(temp.next == null){
+                throw new IndexOutOfBoundsException("Position out of bounds");
+            }
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+    }
+    public static void display(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data + " -> "  );
+            temp = temp.next;
+        }
+        System.out.print("null");
+    }
+    public static void main(String[] args) {
+        addFirst(1);
+        addFirst(2);
+        addFirst(3);
+        addLast(4);
+        display();
+        deleteFirst();
+        System.out.println();
+        display();
+        add(6,3);
+        System.out.println();
+        display();
+    }
+}
