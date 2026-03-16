@@ -35,8 +35,8 @@ class LinkedList{
             return;
         }
         else if(head == tail){
-            head = tail = null;
             System.out.println("Item is deleted " + head.data);
+            head = tail = null;
             return;
         }
         else{
@@ -61,7 +61,7 @@ class LinkedList{
     }
     public static void add(int data , int pos){
         Node newNode = new Node(data);
-         if(head == null) {
+        if(head == null) {
             head = tail = newNode;
             return;
         }
@@ -109,6 +109,54 @@ class LinkedList{
         }
         System.out.print("null");
     }
+    public static void reverse(){
+        Node prev = null;
+        Node curr = head ;
+        Node next ;
+        while(curr != null){
+           next = curr.next;
+           curr.next = prev;
+           prev = curr;
+           curr = next;
+        }
+        head = prev;
+    }
+    public static Node mid(){
+        Node slow = head;
+        Node fast = head ;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+    public static boolean pallindrome(){
+        if(head == null || head.next == null){
+            return true;
+        }
+        Node midNode = mid();
+        Node prev = null;
+        Node curr = midNode;
+        Node next;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next ;
+        }
+        Node right = prev;
+        Node left = head;
+        
+        while(right != null){
+            if(left.data != right.data){
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+         
+        return true;
+    }
     public static void main(String[] args) {
         addFirst(1);
         addFirst(2);
@@ -121,5 +169,11 @@ class LinkedList{
         add(6,3);
         System.out.println();
         display();
+
+        System.out.println();
+        reverse();
+        display();
+        System.out.println();
+        System.out.println(pallindrome());
     }
 }
