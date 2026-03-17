@@ -154,26 +154,106 @@ class LinkedList{
             left = left.next;
             right = right.next;
         }
-         
         return true;
     }
+
+    public static void detectCycle(){
+        Node slow = head;
+        Node fast = head;
+        boolean isCycle = false;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                isCycle = true;
+                break;
+            }
+        }
+        if(isCycle){
+            slow = head;
+            Node prev = null;
+            while(slow != fast){
+                slow = slow.next ;
+                prev = fast;
+                fast = fast.next;
+            }
+            prev.next = null;
+        }
+    }
+    public static Node findCycleStart(){
+        Node slow = head;
+        Node fast = head;
+        boolean isCycle = false;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                isCycle = true;
+                break;
+            }
+        }
+        if(isCycle){
+            slow = head;
+            int count =0;
+            while(slow != fast){
+                slow = slow.next;
+                fast = fast.next;
+                count ++;
+            }
+            System.out.println(count);
+            return slow;
+        }
+        else{
+            System.out.println("No Cycle found");
+            return null;
+        }
+    }
+
+    public static void removeNthFromEnd(int n){
+        Node slow = head ;
+        Node fast = head;
+        for(int i=0;i<n;i++){
+            if(fast == null){
+                System.out.println("the n is larger than the list");
+               return;
+            }
+            fast = fast.next;
+        }
+        if(fast == null){
+            head = head.next ;
+            return;
+        }
+        while(fast.next != null){
+            slow = slow.next;
+            fast=fast.next;
+        }
+        slow.next = slow.next.next;
+    }
+
     public static void main(String[] args) {
         addFirst(1);
         addFirst(2);
         addFirst(3);
         addLast(4);
+        addLast(1);
+        addLast(2);
+        addLast(3);
         display();
-        deleteFirst();
+        // deleteFirst();
+        // System.out.println();
+        // display();
+        // add(6,3);
+        // System.out.println();
+        // display();
+        // System.out.println();
+        // reverse();
+        // display();
+        // System.out.println();
+        // System.out.println(pallindrome());
+        
+        // tail.next = head.next.next;
         System.out.println();
+        removeNthFromEnd(2);
         display();
-        add(6,3);
-        System.out.println();
-        display();
-
-        System.out.println();
-        reverse();
-        display();
-        System.out.println();
-        System.out.println(pallindrome());
     }
 }
