@@ -167,6 +167,8 @@ class LinkedList{
             if(slow==fast){
                 isCycle = true;
                 break;
+                
+            
             }
         }
         if(isCycle){
@@ -178,8 +180,10 @@ class LinkedList{
                 fast = fast.next;
             }
             prev.next = null;
+            System.out.println("Cycle detected and removed");
         }
     }
+    
     public static Node findCycleStart(){
         Node slow = head;
         Node fast = head;
@@ -215,7 +219,7 @@ class LinkedList{
         for(int i=0;i<n;i++){
             if(fast == null){
                 System.out.println("the n is larger than the list");
-               return;
+                return;
             }
             fast = fast.next;
         }
@@ -230,14 +234,26 @@ class LinkedList{
         slow.next = slow.next.next;
     }
 
+    public static void removeduplicates(){
+    Node temp = head;
+    while(temp.next != null){
+        if(temp.data == temp.next.data){
+            temp.next = temp.next.next;
+        }
+        else{
+        temp = temp.next;
+        }
+    }
+}
+
     public static void main(String[] args) {
-        addFirst(1);
         addFirst(2);
-        addFirst(3);
-        addLast(4);
-        addLast(1);
+        addFirst(1);
+        addFirst(1);
         addLast(2);
         addLast(3);
+        addLast(4);
+        addLast(4);
         display();
         // deleteFirst();
         // System.out.println();
@@ -252,8 +268,12 @@ class LinkedList{
         // System.out.println(pallindrome());
         
         // tail.next = head.next.next;
+        // System.out.println();
+        // removeNthFromEnd(2);
+        // display();
+
+        removeduplicates();
         System.out.println();
-        removeNthFromEnd(2);
         display();
     }
 }
