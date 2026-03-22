@@ -2,6 +2,7 @@ import java.util.*;
 
 public class MergeLinkedList {
 
+    
     public static java.util.LinkedList<Integer> mergeTwoLists(java.util.LinkedList<Integer> list1, java.util.LinkedList<Integer> list2) {
 
         java.util.LinkedList<Integer> mergeList = new java.util.LinkedList<>();
