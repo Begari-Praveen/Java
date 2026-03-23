@@ -7,6 +7,7 @@ class LinkedList{
             this.data = data ;
             this.next =  null;
         }
+        
     }
     public static Node head = null;
     public static Node tail = null;
